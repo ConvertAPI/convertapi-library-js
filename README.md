@@ -8,7 +8,7 @@ And many others files manipulations.
 In just few minutes you can integrate it into your application and use it easily.
 
 The ConvertAPI-JS library makes it easier to use the Convert API from your web projects without having to build your own API calls.
-You can get your free API secret at https://www.convertapi.com/a
+You can get your token at https://www.convertapi.com/a/authentication
 
 If you are interested in our old version of **non-module** JavaScript library you can [find it here](https://github.com/ConvertAPI/convertapi-js/tree/last_nonmodule).
 
@@ -37,11 +37,11 @@ npm i convertapi-js@~1.1
 
 ### Configuration
 
-You can get your secret at https://www.convertapi.com/a
+You can get your token at https://www.convertapi.com/a/authentication
 
 ```js
 import ConvertApi from 'convertapi-js'
-let convertApi = ConvertApi.auth('your-api-secret-or-token')
+let convertApi = ConvertApi.auth('api-token')
 ```
 
 ### File conversion
@@ -93,7 +93,7 @@ let url = result.files[0].Url
 Set the last argument for the `ConvertApi.auth` method to use an alternative domain. Dedicated to the region [domain list](https://www.convertapi.com/doc/servers-location).
 
 ```js
-let convertApi = ConvertApi.auth('your-api-secret-or-token', 'https://eu-v2.convertapi.com/')
+let convertApi = ConvertApi.auth('api-token', 'https://eu-v2.convertapi.com/')
 ```
 
 
