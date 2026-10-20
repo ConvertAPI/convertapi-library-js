@@ -203,7 +203,7 @@ jobs:
         env:
           VERSION: ${{ steps.tag.outputs.version }}
           DIST_TAG: ${{ steps.tag.outputs.dist-tag }}
-        run: npm publish "out/$PACKAGE-$VERSION.tgz" --provenance --access public --tag "$DIST_TAG" --ignore-scripts
+        run: npm publish "./out/$PACKAGE-$VERSION.tgz" --provenance --access public --tag "$DIST_TAG" --ignore-scripts
 
       # The registry usually serves a new version within seconds. A slow registry is not a failed release,
       # so this only warns.
