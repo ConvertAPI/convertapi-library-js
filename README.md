@@ -10,7 +10,7 @@ In just few minutes you can integrate it into your application and use it easily
 The ConvertAPI-JS library makes it easier to use the Convert API from your web projects without having to build your own API calls.
 You can get your token at https://www.convertapi.com/a/authentication
 
-If you are interested in our old version of **non-module** JavaScript library you can [find it here](https://github.com/ConvertAPI/convertapi-js/tree/last_nonmodule).
+If you are interested in our old version of **non-module** JavaScript library you can [find it here](https://github.com/ConvertAPI/convertapi-library-js/tree/last_nonmodule).
 
 ## Try it online
 
@@ -62,7 +62,7 @@ let url = result.files[0].Url
 
 ```js
 let params = convertApi.createParams()
-params.add('file', new URL('https://cdn.convertapi.com/test-files/presentation.pptx'))
+params.add('file', new URL('https://cdn.convertapi.com/cara/testfiles/presentation.pptx'))
 let result = await convertApi.convert('pptx', 'pdf', params)
 
 // Get result file URL
@@ -103,4 +103,4 @@ We'll respond to your request ASAP!
 
 ### License
 The ConvertAPI JS Library is licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form") license.
-Refere to the [LICENSE](https://github.com/ConvertAPI/convertapi-js/blob/master/LICENSE) file for more information.
+Refere to the [LICENSE](https://github.com/ConvertAPI/convertapi-library-js/blob/main/LICENSE) file for more information.
