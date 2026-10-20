@@ -82,7 +82,8 @@ jobs:
         run: |
           set -euo pipefail
           # SemVer 2.0 without build metadata (npm drops "+..." and it would only confuse).
-          SEMVER='^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z-]+(\.[0-9A-Za-z-]+)*)?$'
+          # Numeric pre-release identifiers have no leading zeroes (v1.2.0-beta.01 is not SemVer).
+          SEMVER='^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-(0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(\.(0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*)?$'
           if ! [[ "$TAG" =~ $SEMVER ]]; then
             echo "::error::Tag '$TAG' is not v{major}.{minor}.{patch} or v{major}.{minor}.{patch}-{pre-release}, e.g. v1.1.10 or v1.2.0-beta.1"
             exit 1
