@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "ES2020",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
 
     "strict": true,
     "noEmitOnError": true,
@@ -18,6 +18,7 @@
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
+    "rootDir": "./src",
     "outDir": "./dist"
   },
 
