@@ -5,9 +5,8 @@
   "main": "./dist/convertapi.js",
   "types": "./dist/convertapi.d.ts",
   "type": "module",
-  "dependencies": {},
   "devDependencies": {
-    "typescript": "~5.5.4"
+    "typescript": "~7.0.2"
   },
   "publishConfig": {
     "access": "public"
