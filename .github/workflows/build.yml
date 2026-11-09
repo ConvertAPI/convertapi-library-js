@@ -127,8 +127,11 @@ jobs:
           npm pack --ignore-scripts --pack-destination out
           TGZ="out/convertapi-js-$VERSION.tgz"
           test -f "$TGZ"
+          # The listing goes to a file first. Piped into grep -q, tar can still be writing when grep exits
+          # at its first match; tar then fails ("stdout: write error") and pipefail reports a missing file.
+          tar -tzf "$TGZ" > "$RUNNER_TEMP/tgz-files.txt"
           for f in dist/convertapi.js dist/convertapi.d.ts; do
-            tar -tzf "$TGZ" | grep -qx "package/$f" || { echo "::error::$TGZ has no $f"; exit 1; }
+            grep -qx "package/$f" "$RUNNER_TEMP/tgz-files.txt" || { echo "::error::$TGZ has no $f"; exit 1; }
           done
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
