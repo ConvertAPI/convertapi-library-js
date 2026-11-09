@@ -78,10 +78,9 @@ parameters and explanations can be found [here](https://www.convertapi.com/conve
 // Converting PDF to JPG file
 let params = convertApi.createParams()
 params.add('file', e.currentTarget.files[0])
-params.add('ScaleImage', 'true')
-params.add('ScaleProportions', 'true')
 params.add('ImageHeight', '300')
 params.add('ImageWidth', '300')
+params.add('FitToSize', 'true')
 let result = await convertApi.convert('pdf', 'jpg', params)
 
 // Get result file URL
