@@ -18,7 +18,7 @@ CONVERT_API_SECRET=<staging token> CONVERT_API_HOST=stag-v2.convertapi.com npm t
 A release is a **GitHub Release** whose tag is the version, published by `tomasr78`:
 
 ```bash
-gh release create v1.1.10 --repo ConvertAPI/convertapi-library-js --target main --title v1.1.10 --generate-notes
+gh release create v1.1.12 --repo ConvertAPI/convertapi-library-js --target main --title v1.1.12 --generate-notes
 ```
 
 That runs `.github/workflows/publish.yml` in the `npm` environment (deployable from `v*` tags only), which:
@@ -40,15 +40,20 @@ GitHub Actions, organization or user `ConvertAPI`, repository `convertapi-librar
 
 | Dist-tag | Gets | Installed with |
 |---|---|---|
-| `latest` | `1.0.8`, the last **non-module** build (git tag `last_nonmodule`), kept on purpose | `npm i convertapi-js` |
-| `module` | stable releases from `main` (the ES module line, `1.1.x`) | `npm i convertapi-js@~1.1` (as the README says) |
+| `latest` | stable releases from `main` (the ES module line, `1.1.x`) | `npm i convertapi-js`, or `npm i convertapi-js@~1.1` as the README says |
 | `next` | pre-releases | `npm i convertapi-js@next` |
-| `maintenance` | a stable version lower than the current `module` one | `npm i convertapi-js@maintenance` |
+| `maintenance` | a stable version lower than the current `latest` one | `npm i convertapi-js@maintenance` |
+| `module` | `1.1.11`, no longer moved: stable releases up to 1.1.11 were published here | `npm i convertapi-js@module` |
 
-A release never moves `latest`. Moving it to the module line changes what `npm i convertapi-js` and
-unversioned CDN URLs (for example https://cdn.jsdelivr.net/npm/convertapi-js) serve, which breaks pages
-that load the non-module build with a script tag, so it is a separate decision:
-`npm dist-tag add convertapi-js@1.1.10 latest`.
+Up to 1.1.11, `latest` was kept on `1.0.8`, the last **non-module** build (git tag `last_nonmodule`), so
+that pages loading it with an unversioned script tag kept working. Now that `latest` is the ES module line,
+unversioned CDN URLs (for example https://unpkg.com/convertapi-js/lib/convertapi.js or
+https://cdn.jsdelivr.net/npm/convertapi-js) resolve to a version that has no `lib/` and is not a classic
+script, so a page that still uses the non-module build must pin it:
+
+```html
+<script src="https://unpkg.com/convertapi-js@1.0.8/lib/convertapi.js"></script>
+```
 
 **Pre-releases** work the same way and may come from any branch:
 
