@@ -47,7 +47,7 @@ let convertApi = ConvertApi.auth('api-token')
 ### File conversion
 
 Example to convert DOCX file to PDF. All supported formats and options can be found 
-[here](https://www.convertapi.com/conversions).
+[here](https://www.convertapi.com/api).
 
 ```js
 let params = convertApi.createParams()
@@ -72,12 +72,12 @@ let url = result.files[0].Url
 #### Additional conversion parameters
 
 ConvertAPI accepts extra conversion parameters depending on converted formats. All conversion 
-parameters and explanations can be found [here](https://www.convertapi.com/conversions).
+parameters and explanations can be found [here](https://www.convertapi.com/api).
 
 ```js
 // Converting PDF to JPG file
 let params = convertApi.createParams()
-params.add('file', e.currentTarget.files[0])
+params.add('file', elFileInput.files[0])
 params.add('ImageHeight', '300')
 params.add('ImageWidth', '300')
 params.add('FitToSize', 'true')
@@ -89,7 +89,7 @@ let url = result.files[0].Url
 
 ### Alternative domain
 
-Set the last argument for the `ConvertApi.auth` method to use an alternative domain. Dedicated to the region [domain list](https://www.convertapi.com/doc/servers-location).
+Set the last argument for the `ConvertApi.auth` method to use an alternative domain. Dedicated to the region [domain list](https://www.convertapi.com/docs/servers-location).
 
 ```js
 let convertApi = ConvertApi.auth('api-token', 'https://eu-v2.convertapi.com/')
@@ -101,5 +101,5 @@ Please leave all comments, bugs, requests, and issues on the Issues page.
 We'll respond to your request ASAP!
 
 ### License
-The ConvertAPI JS Library is licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form") license.
-Refere to the [LICENSE](https://github.com/ConvertAPI/convertapi-library-js/blob/main/LICENSE) file for more information.
+The ConvertAPI JS Library is licensed under the [MIT](https://opensource.org/licenses/MIT) license.
+Refer to the [LICENSE](https://github.com/ConvertAPI/convertapi-library-js/blob/main/LICENSE) file for more information.
