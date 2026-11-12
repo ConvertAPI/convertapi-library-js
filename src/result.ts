@@ -30,7 +30,7 @@ export default class Result {
     ) {}
 
     /**
-     * Returns conversion duration seconds
+     * Returns the conversion cost (`ConversionCost`), the amount deducted from your balance for this conversion.
      */
     public get duration(): number {
         return this.dto.ConversionCost

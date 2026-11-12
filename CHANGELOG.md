@@ -18,7 +18,8 @@ and `latest` stayed on the non-module 1.0.8.
   2023-07-04 until https://github.com/ConvertAPI/convertapi-library-js/pull/34. Requests always use https.
 - The type declarations (`dist/*.d.ts`) keep their JSDoc comments, so editors show them; the build used to
   remove them. The `auth()` comment describes the API token and the host name instead of the retired
-  `secret` and `apiKey`/`token` object.
+  `secret` and `apiKey`/`token` object, and `Result.duration` is described as the conversion cost
+  (`ConversionCost`) rather than a duration in seconds.
 
 ## 1.1.11 - 2026-10-20
 
