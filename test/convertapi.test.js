@@ -1,5 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
+import { readFile } from 'node:fs/promises'
 import { stubFetch } from './setup.js'
 import ConvertApi from '../dist/convertapi.js'
 import { FileValue } from '../dist/file-param.js'
@@ -14,6 +15,44 @@ test('auth() keeps the token and defaults to v2.convertapi.com', () => {
     assert.equal(api.authCredentials, 'token-1')
     assert.equal(api.host, 'v2.convertapi.com')
     assert.equal(ConvertApi.auth('token-1', 'example.test').host, 'example.test')
+})
+
+test('auth() takes the host as a URL too: https://, http:// and trailing slashes are removed', () => {
+    const cases = [
+        ['https://eu-v2.convertapi.com/', 'eu-v2.convertapi.com'],
+        ['https://eu-v2.convertapi.com', 'eu-v2.convertapi.com'],
+        ['HTTPS://eu-v2.convertapi.com/', 'eu-v2.convertapi.com'],
+        ['http://eu-v2.convertapi.com/', 'eu-v2.convertapi.com'],
+        ['eu-v2.convertapi.com//', 'eu-v2.convertapi.com'],
+        ['eu-v2.convertapi.com', 'eu-v2.convertapi.com'],
+        ['http://localhost:8080/', 'localhost:8080']
+    ]
+    for (const [host, expected] of cases) {
+        assert.equal(ConvertApi.auth('token-1', host).host, expected, host)
+    }
+    assert.equal(new ConvertApi('token-1', 'https://example.test/').host, 'example.test')
+})
+
+test('a host given as a URL is used for uploads and conversions', async t => {
+    const calls = stubFetch(t, { body: { FileId: 'up-1' } }, { body: { FileId: 'up-2' } }, { body: result })
+    // The form the README showed until https://github.com/ConvertAPI/convertapi-library-js/pull/34
+    const api = ConvertApi.auth('token-1', 'https://example.test/')
+    const params = api.createParams()
+    params.add('File', new File(['%PDF'], 'a.pdf'))
+    params.add('OverlayFile', new URL('https://cdn.example.test/overlay.pdf'))
+
+    await api.convert('pdf', 'pdf-watermark', params)
+
+    assert.deepEqual(calls.map(c => c.url), [
+        'https://example.test/upload?filename=a.pdf',
+        'https://example.test/upload?url=https%3A%2F%2Fcdn.example.test%2Foverlay.pdf',
+        'https://example.test/convert/pdf/to/pdf-watermark?storefile=true'
+    ])
+})
+
+test('the type declarations keep the JSDoc that editors show', async () => {
+    const dts = await readFile(new URL('../dist/convertapi.d.ts', import.meta.url), 'utf8')
+    assert.match(dts, /@param host - API host name, without `https:\/\/`/)
 })
 
 test('convert() posts the parameters with a Bearer token and returns the result', async t => {

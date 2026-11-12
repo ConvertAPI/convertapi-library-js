@@ -5,20 +5,28 @@ import Result, {IResultErrorDto} from "./result.js";
 export default class ConvertApi {
 
     /**
-     * Returns ConvertApi object ready to use for conversions
+     * Returns a ConvertApi object ready to use for conversions.
      *
-     * @param credentials - Your ConvertAPI credentials. Should be an `Object` with the `secret` or `apiKey` and `token` properties.
-     * @param host - ConvertApi server domain name
+     * @param credentials - Your API token (https://www.convertapi.com/a/authentication), sent in the `Authorization: Bearer` header.
+     * @param host - API host name, without `https://` or a trailing slash: `v2.convertapi.com` (the default) or a regional host such as `eu-v2.convertapi.com` (https://www.convertapi.com/docs/servers-location). A leading `https://` or `http://` and trailing slashes are removed; requests always use https.
      * @returns - New ConvertApi object
      */
     static auth(credentials: string, host?: string): ConvertApi {
         return new ConvertApi(credentials, host)
     }
 
+    /** API host name that requests go to, such as `v2.convertapi.com`, without `https://` or a trailing slash. */
+    public readonly host: string
+
     constructor(
         public readonly authCredentials: string,
-        public readonly host: string='v2.convertapi.com'
-    ) {}
+        host: string = 'v2.convertapi.com'
+    ) {
+        // Requests go to https://{host}/..., so a host given as a URL, such as 'https://eu-v2.convertapi.com/'
+        // (in the README until https://github.com/ConvertAPI/convertapi-library-js/pull/34), loses its scheme
+        // and trailing slashes instead of breaking every request.
+        this.host = host.replace(/^https?:\/\//i, '').replace(/\/+$/, '')
+    }
 
     /**
      * Returns initialized and ready to use new conversion parameters object.

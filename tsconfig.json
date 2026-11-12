@@ -14,6 +14,8 @@
     "noUnusedLocals": true,
     "strictNullChecks": true,
 
+    // The JavaScript ships without comments. `npm run build` then emits the declarations a second time
+    // with --removeComments false, so dist/*.d.ts keep the JSDoc that editors show.
     "removeComments": true,
     "sourceMap": true,
     "declaration": true,

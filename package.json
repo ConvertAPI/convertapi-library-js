@@ -15,7 +15,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc --emitDeclarationOnly --removeComments false",
     "test": "npm run build && node --test test/*.test.js",
     "prepublishOnly": "echo 'convertapi-js is published by a GitHub Release, see RELEASING.md' && exit 1"
   },
