@@ -8,7 +8,8 @@ and `latest` stayed on the non-module 1.0.8.
 ## Unreleased
 
 - Stable releases take the npm dist-tag `latest` instead of `module`, so `npm i convertapi-js` and
-  unversioned CDN URLs get the ES module build. `module` stays on 1.1.11. A page that loads the non-module
+  unversioned CDN URLs get the ES module build. `latest` was moved from 1.0.8 to 1.1.11 on 2026-11-12
+  (`npm dist-tag add`). `module` stays on 1.1.11. A page that loads the non-module
   1.0.8 with an unversioned script tag must pin it: https://unpkg.com/convertapi-js@1.0.8/lib/convertapi.js
 
 ## 1.1.11 - 2026-10-20

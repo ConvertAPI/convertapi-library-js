@@ -45,8 +45,9 @@ GitHub Actions, organization or user `ConvertAPI`, repository `convertapi-librar
 | `maintenance` | a stable version lower than the current `latest` one | `npm i convertapi-js@maintenance` |
 | `module` | `1.1.11`, no longer moved: stable releases up to 1.1.11 were published here | `npm i convertapi-js@module` |
 
-Up to 1.1.11, `latest` was kept on `1.0.8`, the last **non-module** build (git tag `last_nonmodule`), so
-that pages loading it with an unversioned script tag kept working. Now that `latest` is the ES module line,
+Until 2026-11-12, `latest` was kept on `1.0.8`, the last **non-module** build (git tag `last_nonmodule`), so
+that pages loading it with an unversioned script tag kept working. On that day it was moved to `1.1.11` with
+`npm dist-tag add convertapi-js@1.1.11 latest`. Now that `latest` is the ES module line,
 unversioned CDN URLs (for example https://unpkg.com/convertapi-js/lib/convertapi.js or
 https://cdn.jsdelivr.net/npm/convertapi-js) resolve to a version that has no `lib/` and is not a classic
 script, so a page that still uses the non-module build must pin it:
