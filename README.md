@@ -90,10 +90,10 @@ let url = result.files[0].Url
 
 ### Alternative domain
 
-Set the last argument for the `ConvertApi.auth` method to use an alternative domain. Dedicated to the region [domain list](https://www.convertapi.com/docs/servers-location).
+To use a regional server, pass its host name as the second argument of `ConvertApi.auth`, without `https://` or a trailing slash. The default is `v2.convertapi.com`; the regional hosts are listed on the [server locations](https://www.convertapi.com/docs/servers-location) page.
 
 ```js
-let convertApi = ConvertApi.auth('api-token', 'https://eu-v2.convertapi.com/')
+let convertApi = ConvertApi.auth('api-token', 'eu-v2.convertapi.com')
 ```
 
 
