@@ -6,14 +6,14 @@ run-name: Publishing convertapi-js ${{ github.event.release.tag_name }} to npm
 # publishes it to npm with provenance. npm versions are public and permanent - a published version can be
 # deprecated but never replaced - so nothing here retries, overwrites or skips a duplicate.
 #
-#   gh release create v1.1.10 --target main --generate-notes                  -> convertapi-js 1.1.10 (module)
+#   gh release create v1.1.12 --target main --generate-notes                  -> convertapi-js 1.1.12 (latest)
 #   gh release create v1.2.0-beta.1 --target main --prerelease ...            -> convertapi-js 1.2.0-beta.1 (next)
 #
-# The npm dist-tag `latest` is deliberately left on 1.0.8, the last non-module (script tag) build from the
-# `last_nonmodule` git tag, and the ES module line (1.1.x, this branch) is published under the dist-tag
-# `module`; the README installs it with `npm i convertapi-js@~1.1`. Moving `latest` to the module line would
-# change what `npm i convertapi-js` and unversioned CDN URLs serve, so it is a separate, deliberate step
-# (`npm dist-tag add convertapi-js@X.Y.Z latest`), not something a release does.
+# A stable release takes the npm dist-tag `latest`, so `npm i convertapi-js` and unversioned CDN URLs get the
+# ES module build that the README and convertapi.com document. Releases up to 1.1.11 went to the dist-tag
+# `module` instead, which stays on 1.1.11, while `latest` was kept on 1.0.8, the last non-module (script tag)
+# build from the `last_nonmodule` git tag. A page that still loads that build with a script tag must pin it:
+# https://unpkg.com/convertapi-js@1.0.8/lib/convertapi.js
 #
 # A stable version must be a commit on main. A pre-release may be any commit, so a branch can be tried
 # out as a preview package before it is merged.
@@ -30,7 +30,7 @@ env:
   # admins create v* tags) and the npm environment, which accepts only v* tags.
   PUBLISHER: tomasr78
   PACKAGE: convertapi-js
-  STABLE_DIST_TAG: module
+  STABLE_DIST_TAG: latest
   CONVERT_API_HOST: stag-v2.convertapi.com
 
 jobs:

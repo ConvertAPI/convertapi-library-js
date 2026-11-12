@@ -11,6 +11,7 @@ The ConvertAPI-JS library makes it easier to use the Convert API from your web p
 You can get your token at https://www.convertapi.com/a/authentication
 
 If you are interested in our old version of **non-module** JavaScript library you can [find it here](https://github.com/ConvertAPI/convertapi-library-js/tree/last_nonmodule).
+To load it with a script tag, pin its version: `<script src="https://unpkg.com/convertapi-js@1.0.8/lib/convertapi.js"></script>`.
 
 ## Try it online
 
