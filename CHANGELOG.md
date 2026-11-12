@@ -11,6 +11,14 @@ and `latest` stayed on the non-module 1.0.8.
   unversioned CDN URLs get the ES module build. `latest` was moved from 1.0.8 to 1.1.11 on 2026-11-12
   (`npm dist-tag add`). `module` stays on 1.1.11. A page that loads the non-module
   1.0.8 with an unversioned script tag must pin it: https://unpkg.com/convertapi-js@1.0.8/lib/convertapi.js
+- `ConvertApi.auth()` also takes the host as a URL: a leading `https://` or `http://` and trailing slashes
+  are removed, so `ConvertApi.auth('api-token', 'https://eu-v2.convertapi.com/')` sends requests to
+  `https://eu-v2.convertapi.com/convert/...`. Before, that form failed with "fetch failed", because the
+  library requested `https://https://eu-v2.convertapi.com//convert/...`. The README showed it from
+  2023-07-04 until https://github.com/ConvertAPI/convertapi-library-js/pull/34. Requests always use https.
+- The type declarations (`dist/*.d.ts`) keep their JSDoc comments, so editors show them; the build used to
+  remove them. The `auth()` comment describes the API token and the host name instead of the retired
+  `secret` and `apiKey`/`token` object.
 
 ## 1.1.11 - 2026-10-20
 
